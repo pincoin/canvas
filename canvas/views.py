@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.views import generic
 
-# Create your views here.
+
+class ProductListView(generic.ListView):
+    pass
+
+
+class ProductCustomizeView(generic.TemplateView):
+    template_name = 'canvas/product_customize.html'
