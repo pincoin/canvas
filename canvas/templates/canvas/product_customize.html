@@ -189,43 +189,41 @@
 <div id="wrapper">
     <div id="content">
         <!-- The design page -->
-        <div id="editorPage" class="area">
+        <div id="editorPage">
             <div id="iframeWrapper">
                 <iframe id="editorFrame" width="100%" height="800px"></iframe>
             </div>
             <div id="saveAndNextButtonsWrapper">
                 <!-- The Save button -->
-                <input id="saveButton" type="button" class="btn btn-info btn-lg" value="Save"/>
+                <input id="saveButton" type="button" value="Save"/>
                 <!-- The Finish design button -->
-                <input id="nextButton" type="button" class="btn btn-success btn-lg" value="Finish design >"/>
+                <input id="nextButton" type="button" value="Finish design >"/>
             </div>
         </div>
 
         <!-- The approval page -->
-        <div id="approvePage" class="area" style="display: none">
-            <div class="container-fluid">
+        <div id="approvePage" style="display: none">
+            <div>
                 <h1>Approve Your Product</h1>
                 <!-- proof images -->
                 <img class="previewImg" id="preview"/>
                 <img class="previewImg" id="previewPage2"/>
             </div>
-            <p>
             <div id="approveButtonWrapper">
-                <input id="approveButton" type="button" class="btn btn-success btn-lg" value="Approve >"/>
+                <input id="approveButton" type="button" value="Approve >"/>
             </div>
-            </p>
             <div class="return">
                 <a id="lnkEditAgain">&lt; I want to make some changes</a>
             </div>
         </div>
 
         <!-- 디자인 완료 페이지 -->
-        <div id="finishOrderPage" class="area" style="display: none">
+        <div id="finishOrderPage" style="display: none">
             <h1>Your Product is Ready</h1>
             <!-- 고해상도 출력 저장 링크 -->
             The print-ready file can be downloaded from <a id="hiResLink">this link</a>
-            <div class="right">
-                <input id="newDesign" type="button" class="btn btn-info btn-lg" value="< New design"/>
+            <div>
+                <input id="newDesign" type="button" value="< New design"/>
             </div>
         </div>
     </div>
