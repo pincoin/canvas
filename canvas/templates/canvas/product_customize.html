@@ -18,30 +18,45 @@
         $(function () {
             // 제품 정의
             let productDefinition = {
-                surfaces: [
+                surfaces: [{
+                    name: "Front Side",
+                    printAreas: [{
+                        designFile: "samples/businesscard/test-11", // PSD, IDML 파일 확장자 제외
+                        safetyLines: [{ // 안전선
+                            margin: 5,
+                            color: "rgba(0,0,255,1)",
+                            altColor: "rgba(255,255,255,0)"
+                        }]
+                    }],
+                    previewMockups: [{down: "samples/mockup1"}],
+                    proofImage: {
+                        fileFormat: "PNG",
+                        rgbColorProfileName: "Adobe RGB (1998)",
+                        mockupEnabled: true
+                    }
+                },
                     {
-                        "printAreas": [{
-                            "designFile": "samples/businesscard/test-11",
-
+                        name: "Back Side",
+                        printAreas: [{
+                            designFile: "samples/businesscard/test-12"
                         }],
-                        "previewMockup": {
-                            "down": "samples/mockup1"
-                        }
-                    },
-                    {
-                        "printAreas": [{
-                            "designFile": "samples/businesscard/test-12",
-
-                        }],
-                        "previewMockup": {
-                            "down": "samples/mockup1"
-                        }
+                        previewMockups: [{down: "samples/mockup1"}]
                     }
                 ]
             };
 
             // 에디터 설정 정의
-            let configuration = {widgets: {FinishButton: {mode: "Disabled"}}};
+            let configuration = {
+                widgets: {
+                    FinishButton: {
+                        mode: "Disabled" // "Download", "Disabled"
+                    }
+                },
+                initialMode: "Advanced", // "Simple", "Advanced", "SimpleOnly"
+                rendering: {
+                    proofImageMockupEnabled: true
+                }
+            };
 
             let editorFrame = $("#editorFrame");
 
