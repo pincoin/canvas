@@ -129,7 +129,18 @@
             document
                 .querySelector('#editorPage #removeButton')
                 .addEventListener('click', function (e) {
-                    console.log('remove');
+                    editor.getProduct()
+                        .then(function (product) {
+                            if (product.surfaces.length > 1) {
+                                if (product.currentSurface !== product.surfaces[0]) {
+                                    // 현재 서피스 삭제 (단, 첫 서피스는 삭제 불가)
+                                    product.removeSurface(product.currentSurface)
+                                        .catch(function (error) {
+                                            console.error('Removing the surface failed with exception: ', error);
+                                        });
+                                }
+                            }
+                        });
                 });
 
             // 미리보기 검증 이미지 가져오기
