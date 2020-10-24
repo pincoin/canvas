@@ -92,55 +92,54 @@
             let saveData = null;
 
             // 제품 저장
-            $("#editorPage #saveButton").click(function () {
+            document
+                .querySelector('#editorPage #saveButton')
+                .addEventListener('click', function (e) {
+                    editor.saveProduct()
+                        .then(function (result) {
+                            // 제품 상태 정보 저장
+                            saveData = result;
+                        })
+                        .catch(function (error) {
+                            // 제품 저장 실패
+                            saveData = handleError(error, "Save failed with exception: ");
+                        });
+                });
 
-                editor.saveProduct()
-                    //If the product has been successfully saved.
-                    .then(function (result) {
-                        //Saving the product state info.
-                        saveData = result;
-                    })
-                    //If there was an error thrown when saving the product.
-                    .catch(function (error) {
-                        saveData = handleError(error, "Save failed with exception: ");
-                    });
-            });
+            // 미리보기 검증 이미지 가져오기
+            document
+                .querySelector('#editorPage #nextButton')
+                .addEventListener('click', function (e) {
+                    editor.getProofImages()
+                        .then(function (result) {
+                            // 미리보기 검증 이미지 정보 저장
+                            approveData = result;
 
-            //Getting links to proof images.
-            $("#editorPage #nextButton").click(function () {
+                            // 승인 페이지로 이동
+                            goToPage("approve");
+                        })
+                        .catch(function (error) {
+                            // 미리보기 검증 이미지 가져오기 실패
+                            approveData = handleError(error, "Getting proof images failed with exception: ");
+                        });
+                });
 
-                editor.getProofImages()
-                    //If proof images have been successfully received.
-                    .then(function (result) {
-                        //Saving proof images info.
-                        approveData = result;
+            // 제품 디자인 편집 완료
+            document
+                .querySelector('#editorPage #nextButton')
+                .addEventListener('click', function (e) {
+                    editor.finishProductDesign()
+                        .then(function (result) {
+                            // 고해상도 출력 정보 저장
+                            renderData = result;
 
-                        //Go to the approval page.
-                        goToPage("approve");
-                    })
-                    //If there was an error thrown while getting the proof images.
-                    .catch(function (error) {
-                        approveData = handleError(error, "Getting proof images failed with exception: ");
-                    });
-            });
-
-            //Finishing the product customization.
-            $("#approvePage #approveButton").click(function () {
-
-                editor.finishProductDesign()
-                    //If the product customization has been successfully completed.
-                    .then(function (result) {
-                        //Saving hi-res output info.
-                        renderData = result;
-
-                        //Go to the finish page.
-                        goToPage("finish");
-                    })
-                    //If there was an error thrown while finishing the product customization.
-                    .catch(function (error) {
-                        renderData = handleError(error, "Product customization completion failed with exception: ");
-                    });
-            });
+                            // 완료 페이지로 이동
+                            goToPage("finish");
+                        })
+                        .catch(function (error) {
+                            renderData = handleError(error, "Product customization completion failed with exception: ");
+                        });
+                });
 
             //Opening a new product in the designer.
             $("#finishOrderPage #newDesign").click(function () {
