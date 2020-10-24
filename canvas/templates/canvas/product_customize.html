@@ -5,17 +5,12 @@
     <meta charset="utf-8"/>
     <title>Business cards - The sample page - Customer's Canvas</title>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js">
-    </script>
     <link href="{% static 'css/canvas/index.css' %}" rel="stylesheet"/>
     <!-- IFrameAPI 스크립트 -->
-    <script id="CcIframeApiScript"
-            type="text/javascript"
-            src="{{ IframeApi }}">
-    </script>
+    <script id="CcIframeApiScript" type="text/javascript" src="{{ IframeApi }}"></script>
 
     <script>
-        $(function () {
+        document.addEventListener('DOMContentLoaded', function () {
             // 제품 정의
             let productDefinition = {
                 surfaces: [{
@@ -156,9 +151,9 @@
                     goToPage("design");
                 });
 
-            //Initializing the approval and finish pages with the product info.
+            // 제품 정보로 승인과 완료 페이지 초기화
 
-            //Initializing the approval page with links to the proof images.
+            // 미리보기 검증 이미지 링크로 승인 페이지 초기화
             function setApprovePageData() {
                 let previewElements = document.querySelectorAll('#approvePage .previewImg');
 
@@ -176,8 +171,7 @@
                 document.querySelector('#finishOrderPage #hiResLink').setAttribute('href', renderData.hiResOutputUrls[0]);
             }
 
-            //The wizard navigation.
-
+            // 네비게이션 마법사
             function goToPage(to) {
                 setupPage(to);
             }
