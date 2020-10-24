@@ -11,7 +11,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // 제품 정의
+            // 제품 디자인 정의
             let productDefinition = {
                 surfaces: [{
                     name: "Front Side",
@@ -64,7 +64,7 @@
 
             let loadData = null;
 
-            // 에디터에 제품 불러오기
+            // 에디터에 제품 디자인 불러오기
             CustomersCanvas.IframeApi.loadEditor(editorFrame, productDefinition, configuration)
                 .then(function (e) {
                     // 에디터 불러오기 성공
@@ -86,7 +86,7 @@
             // saveProduct가 만드는 데이터 저장
             let saveData = null;
 
-            // 제품 저장
+            // 제품 페이지 저장
             document
                 .querySelector('#editorPage #saveButton')
                 .addEventListener('click', function (e) {
@@ -99,6 +99,29 @@
                             // 제품 저장 실패
                             saveData = handleError(error, 'Save failed with exception: ');
                         });
+                });
+
+            // 제품 페이지 추가
+            document
+                .querySelector('#editorPage #addButton')
+                .addEventListener('click', function (e) {
+                    console.log('add');
+                    editor.getProduct()
+                        .then(function (product) {
+                            // 빈 디자인으로 추가
+                            // 서피스 크기는 포인트 값으로 지정(1 포인트 = 1/72인치)
+                            product.addSurface({width: 720, height: 504})
+                                .catch(function (error) {
+                                    console.error('Failed to add an empty surface with an exception: ', error);
+                                });
+                        });
+                });
+
+            // 제품 페이지 삭제
+            document
+                .querySelector('#editorPage #removeButton')
+                .addEventListener('click', function (e) {
+                    console.log('remove');
                 });
 
             // 미리보기 검증 이미지 가져오기
@@ -136,7 +159,7 @@
                         });
                 });
 
-            // 디자인 에디터에서 새 제품 열기
+            // 디자인 에디터에서 새 제품 디자인 열기
             document
                 .querySelector('#finishOrderPage #newDesign')
                 .addEventListener('click', function (e) {
@@ -144,7 +167,7 @@
                     goToPage('design');
                 });
 
-            // 디자인 에디터에서 제품 다시 열기
+            // 디자인 에디터에서 제품 디자인 다시 열기
             document
                 .querySelector('#approvePage #lnkEditAgain')
                 .addEventListener('click', function (e) {
@@ -213,6 +236,8 @@
                 <iframe id="editorFrame" width="100%" height="800px"></iframe>
             </div>
             <div id="saveAndNextButtonsWrapper">
+                <input id="addButton" type="button" value="추가"/>
+                <input id="removeButton" type="button" value="삭제"/>
                 <input id="saveButton" type="button" value="저장"/>
                 <input id="nextButton" type="button" value="디자인 완료 >"/>
             </div>
