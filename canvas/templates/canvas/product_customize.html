@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <meta charset="utf-8"/>
-    <title>Business cards - The sample page - Customer's Canvas</title>
+    <title>Customer's Canvas 예제 페이지</title>
 
     <link href="{% static 'css/canvas/index.css' %}" rel="stylesheet"/>
     <!-- IFrameAPI 스크립트 -->
@@ -72,10 +72,10 @@
                 })
                 .catch(function (error) {
                     // 에디터 불러오기 실패
-                    loadData = handleError(error, "Load failed with exception: ");
+                    loadData = handleError(error, 'Load failed with exception: ');
                 });
 
-            let currentPage = "design";
+            let currentPage = 'design';
 
             // getProofImages가 만드는 데이터 저장
             let approveData = null;
@@ -97,7 +97,7 @@
                         })
                         .catch(function (error) {
                             // 제품 저장 실패
-                            saveData = handleError(error, "Save failed with exception: ");
+                            saveData = handleError(error, 'Save failed with exception: ');
                         });
                 });
 
@@ -111,11 +111,11 @@
                             approveData = result;
 
                             // 승인 페이지로 이동
-                            goToPage("approve");
+                            goToPage('approve');
                         })
                         .catch(function (error) {
                             // 미리보기 검증 이미지 가져오기 실패
-                            approveData = handleError(error, "Getting proof images failed with exception: ");
+                            approveData = handleError(error, 'Getting proof images failed with exception: ');
                         });
                 });
 
@@ -129,10 +129,10 @@
                             renderData = result;
 
                             // 완료 페이지로 이동
-                            goToPage("finish");
+                            goToPage('finish');
                         })
                         .catch(function (error) {
-                            renderData = handleError(error, "Product customization completion failed with exception: ");
+                            renderData = handleError(error, 'Product customization completion failed with exception: ');
                         });
                 });
 
@@ -141,14 +141,14 @@
                 .querySelector('#finishOrderPage #newDesign')
                 .addEventListener('click', function (e) {
                     editor.revertProduct();
-                    goToPage("design");
+                    goToPage('design');
                 });
 
             // 디자인 에디터에서 제품 다시 열기
             document
                 .querySelector('#approvePage #lnkEditAgain')
                 .addEventListener('click', function (e) {
-                    goToPage("design");
+                    goToPage('design');
                 });
 
             // 제품 정보로 승인과 완료 페이지 초기화
@@ -159,7 +159,7 @@
 
                 previewElements.forEach(function (element) {
                     element.setAttribute('src', '');
-                })
+                });
 
                 for (let i = 0; i < approveData.proofImageUrls.length && i < previewElements.length; i++) {
                     previewElements[i].setAttribute('src', approveData.proofImageUrls[i]);
@@ -168,7 +168,9 @@
 
             // 출력용 파일 링크와 향후 디자인 재편집을 위한 링크를 가진 완료 페이지 초기화
             function setFinishPageData() {
-                document.querySelector('#finishOrderPage #hiResLink').setAttribute('href', renderData.hiResOutputUrls[0]);
+                document
+                    .querySelector('#finishOrderPage #hiResLink')
+                    .setAttribute('href', renderData.hiResOutputUrls[0]);
             }
 
             // 네비게이션 마법사
@@ -181,16 +183,17 @@
             }
 
             let workflowPages = {
-                "design": {elements: document.getElementById('editorPage')},
-                "approve": {elements: document.getElementById('approvePage'), setData: setApprovePageData},
-                "finish": {elements: document.getElementById('finishOrderPage'), setData: setFinishPageData}
+                'design': {elements: document.getElementById('editorPage')},
+                'approve': {elements: document.getElementById('approvePage'), setData: setApprovePageData},
+                'finish': {elements: document.getElementById('finishOrderPage'), setData: setFinishPageData}
             }
 
             function setupPage(page) {
                 let destPageData = workflowPages[page];
 
-                if (typeof destPageData.setData === "function")
+                if (typeof destPageData.setData === 'function') {
                     destPageData.setData();
+                }
 
                 workflowPages[currentPage].elements.style.display = 'none';
                 destPageData.elements.style.display = 'block';
@@ -210,10 +213,8 @@
                 <iframe id="editorFrame" width="100%" height="800px"></iframe>
             </div>
             <div id="saveAndNextButtonsWrapper">
-                <!-- The Save button -->
-                <input id="saveButton" type="button" value="Save"/>
-                <!-- The Finish design button -->
-                <input id="nextButton" type="button" value="Finish design >"/>
+                <input id="saveButton" type="button" value="저장"/>
+                <input id="nextButton" type="button" value="디자인 완료 >"/>
             </div>
         </div>
 
@@ -221,25 +222,24 @@
         <div id="approvePage" style="display: none">
             <div>
                 <h1>Approve Your Product</h1>
-                <!-- proof images -->
+                <!-- 미리보기 검증 이미지 -->
                 <img class="previewImg" id="preview" alt="preview image" src=""/>
                 <img class="previewImg" id="previewPage2" alt="preview image2" src=""/>
             </div>
             <div id="approveButtonWrapper">
-                <input id="approveButton" type="button" value="Approve >"/>
+                <input id="approveButton" type="button" value="승인 >"/>
             </div>
             <div class="return">
-                <a id="lnkEditAgain">&lt; I want to make some changes</a>
+                <a id="lnkEditAgain">&lt; 재수정</a>
             </div>
         </div>
 
         <!-- 디자인 완료 페이지 -->
         <div id="finishOrderPage" style="display: none">
-            <h1>Your Product is Ready</h1>
-            <!-- 고해상도 출력 저장 링크 -->
-            The print-ready file can be downloaded from <a id="hiResLink">this link</a>
+            <h1>출력용 파일 준비 완료</h1>
+            <a id="hiResLink">출력용 파일 다운로드</a>
             <div>
-                <input id="newDesign" type="button" value="< New design"/>
+                <input id="newDesign" type="button" value="< 새 디자인"/>
             </div>
         </div>
     </div>
