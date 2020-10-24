@@ -58,7 +58,7 @@
                 }
             };
 
-            let editorFrame = $("#editorFrame");
+            let editorFrame = document.getElementById('editorFrame');
 
             let editor = null;
 
@@ -70,7 +70,7 @@
             let loadData = null;
 
             // 에디터에 제품 불러오기
-            CustomersCanvas.IframeApi.loadEditor(editorFrame[0], productDefinition, configuration)
+            CustomersCanvas.IframeApi.loadEditor(editorFrame, productDefinition, configuration)
                 .then(function (e) {
                     // 에디터 불러오기 성공
                     editor = e;
