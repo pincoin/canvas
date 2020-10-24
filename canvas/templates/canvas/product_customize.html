@@ -171,9 +171,9 @@
                 }
             }
 
-            //Initializing the finish page with the print-ready output URL and a link for reopening the product in the designer for further editing.
+            // 출력용 파일 링크와 향후 디자인 재편집을 위한 링크를 가진 완료 페이지 초기화
             function setFinishPageData() {
-                $("#finishOrderPage #hiResLink").attr("href", renderData.hiResOutputUrls[0]);
+                document.querySelector('#finishOrderPage #hiResLink').setAttribute('href', renderData.hiResOutputUrls[0]);
             }
 
             //The wizard navigation.
@@ -187,9 +187,9 @@
             }
 
             let workflowPages = {
-                "design": {elements: $("#editorPage")},
-                "approve": {elements: $("#approvePage"), setData: setApprovePageData},
-                "finish": {elements: $("#finishOrderPage"), setData: setFinishPageData}
+                "design": {elements: document.getElementById('editorPage')},
+                "approve": {elements: document.getElementById('approvePage'), setData: setApprovePageData},
+                "finish": {elements: document.getElementById('finishOrderPage'), setData: setFinishPageData}
             }
 
             function setupPage(page) {
@@ -198,11 +198,10 @@
                 if (typeof destPageData.setData === "function")
                     destPageData.setData();
 
-                workflowPages[currentPage].elements.fadeOut(function () {
-                    destPageData.elements.show();
+                workflowPages[currentPage].elements.style.display = 'none';
+                destPageData.elements.style.display = 'block';
 
-                    currentPage = page;
-                });
+                currentPage = page;
             }
         })
     </script>
