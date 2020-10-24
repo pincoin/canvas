@@ -170,6 +170,39 @@
                             // 고해상도 출력 정보 저장
                             renderData = result;
 
+                            // TODO: 장고 백엔드에 renderData 저장 후 장바구니로 이동
+                            console.log(renderData);
+
+                            /*
+                            {
+                                "hiResOutputUrls": ["https://.../api/rendering/GetHiResOutput/default/43bf835e-cec6-4a4c-8a27-ec163725e6ec/-1_-1.pdf"],
+                                "returnToEditUrl": "https://.../page/iframe/?state=43bf835e-cec6-4a4c-8a27-ec163725e6ec&userId=default",
+                                "stateId": "43bf835e-cec6-4a4c-8a27-ec163725e6ec",
+                                "userId": "default",
+                                "proofImageUrls": [
+                                    ["https://.../api/rendering/GetProofImage/default/43bf835e-cec6-4a4c-8a27-ec163725e6ec/0_0.png"],
+                                    ["https://.../api/rendering/GetProofImage/default/43bf835e-cec6-4a4c-8a27-ec163725e6ec/1_0.jpg"]
+                                ],
+                                "status": "success",
+                                "userChanges": {
+                                    "texts": [],
+                                    "inStringPlaceholders": [],
+                                    "mockups": {},
+                                    "surfaces": {
+                                        "Front Side": {
+                                            "texts": [],
+                                            "inStringPlaceholders": []
+                                        },
+                                        "Back Side": {
+                                            "texts": [],
+                                            "inStringPlaceholders": []
+                                        }
+                                    }
+                                },
+                                ... 생략 ...
+                            }
+                            */
+
                             // 완료 페이지로 이동
                             goToPage('finish');
                         })
