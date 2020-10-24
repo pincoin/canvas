@@ -141,16 +141,20 @@
                         });
                 });
 
-            //Opening a new product in the designer.
-            $("#finishOrderPage #newDesign").click(function () {
-                editor.revertProduct();
-                goToPage("design");
-            });
+            // 디자인 에디터에서 새 제품 열기
+            document
+                .querySelector('#finishOrderPage #newDesign')
+                .addEventListener('click', function (e) {
+                    editor.revertProduct();
+                    goToPage("design");
+                });
 
-            //Reopening the product in the designer.
-            $("#approvePage #lnkEditAgain").click(function () {
-                goToPage("design");
-            });
+            // 디자인 에디터에서 제품 다시 열기
+            document
+                .querySelector('#approvePage #lnkEditAgain')
+                .addEventListener('click', function (e) {
+                    goToPage("design");
+                });
 
             //Initializing the approval and finish pages with the product info.
 
