@@ -105,7 +105,6 @@
             document
                 .querySelector('#editorPage #addButton')
                 .addEventListener('click', function (e) {
-                    console.log('add');
                     editor.getProduct()
                         .then(function (product) {
                             // 빈 디자인으로 추가
@@ -114,6 +113,15 @@
                                 .catch(function (error) {
                                     console.error('Failed to add an empty surface with an exception: ', error);
                                 });
+
+                            // 템플릿으로 추가
+                            /*
+                            product.addSurface({
+                                printAreas: [{designFile: "postcard_side2"}]
+                            }).catch(function (error) {
+                                console.error('Failed to add a surface from a template with an exception: '', error);
+                            });
+                             */
                         });
                 });
 
