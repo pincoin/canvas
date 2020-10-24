@@ -160,9 +160,14 @@
 
             //Initializing the approval page with links to the proof images.
             function setApprovePageData() {
-                let previewElements = $("#approvePage .previewImg").attr("src", "");
+                let previewElements = document.querySelectorAll('#approvePage .previewImg');
+
+                previewElements.forEach(function (element) {
+                    element.setAttribute('src', '');
+                })
+
                 for (let i = 0; i < approveData.proofImageUrls.length && i < previewElements.length; i++) {
-                    previewElements[i].setAttribute("src", approveData.proofImageUrls[i]);
+                    previewElements[i].setAttribute('src', approveData.proofImageUrls[i]);
                 }
             }
 
